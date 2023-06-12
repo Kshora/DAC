@@ -16,14 +16,14 @@ try:
     
 
     while(1):
-        for i in range(0,33,1):
-            DAC.DAC8532_Out_Voltage(DAC8532.channel_A, 3.3 * i / 33)
-            DAC.DAC8532_Out_Voltage(DAC8532.channel_B, 3.3 - 3.3 * i / 33)
+        for i in range(0,50,1):
+            DAC.DAC8532_Out_Voltage(DAC8532.channel_A, 5.0 * i / 55)
+            DAC.DAC8532_Out_Voltage(DAC8532.channel_B, 5.0 - 5.0 * i / 50)
             time.sleep(0.2)
             
-        for i in range(0,33,1):
-            DAC.DAC8532_Out_Voltage(DAC8532.channel_B, 3.3 * i / 33)
-            DAC.DAC8532_Out_Voltage(DAC8532.channel_A, 3.3 - 3.3 * i / 33)
+        for i in range(0,50,1):
+            DAC.DAC8532_Out_Voltage(DAC8532.channel_B, 5.0 * i / 50)
+            DAC.DAC8532_Out_Voltage(DAC8532.channel_A, 5.0 - 5.0 * i / 50)
             time.sleep(0.2)
 
 
