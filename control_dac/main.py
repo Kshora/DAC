@@ -1,35 +1,26 @@
 #!/usr/bin/python
 # -*- coding:utf-8 -*-
 
+from daccont import *
+from AIO import *
+import threading
 
-import time
-import DAC8532
-import RPi.GPIO as GPIO
-
-
-try:
-    print("Program start\r\n")
-    
-    DAC = DAC8532.DAC8532()
-    DAC.DAC8532_Out_Voltage(DAC8532.channel_A, 0)
-    DAC.DAC8532_Out_Voltage(DAC8532.channel_B, 0)
-    
-
-    while(1):
-        for i in range(0,50,1):
-            DAC.DAC8532_Out_Voltage(DAC8532.channel_A, 5.0 * i / 55)
-            DAC.DAC8532_Out_Voltage(DAC8532.channel_B, 5.0 - 5.0 * i / 50)
-            time.sleep(0.2)
-            
-        for i in range(0,50,1):
-            DAC.DAC8532_Out_Voltage(DAC8532.channel_B, 5.0 * i / 50)
-            DAC.DAC8532_Out_Voltage(DAC8532.channel_A, 5.0 - 5.0 * i / 50)
-            time.sleep(0.2)
+def ret_main():
+    try:
+        while(1):
+            main()
+            time.sleep(1)
+    except :
+        exit()
 
 
-except :
-    DAC.DAC8532_Out_Voltage(DAC8532.channel_A, 0)
-    DAC.DAC8532_Out_Voltage(DAC8532.channel_B, 0)
-    GPIO.cleanup()
-    print ("\r\nProgram end     ")
-    exit()
+thread1 = threading.Thread(target=dac_control,daemon=True)
+thread2 = threading.Thread(target=ret_main,daemon=True)
+
+thread1.start()
+thread2.start()
+
+thread1.join()
+thread2.join()
+
+print("Program end     ")
