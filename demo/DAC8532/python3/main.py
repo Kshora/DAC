@@ -25,10 +25,11 @@ try:
             DAC.DAC8532_Out_Voltage(DAC8532.channel_B, 3.3 * i / 33)
             DAC.DAC8532_Out_Voltage(DAC8532.channel_A, 3.3 - 3.3 * i / 33)
             time.sleep(0.2)
-    DAC.DAC8532_Out_Voltage(DAC8532.channel_A, 0)
-    DAC.DAC8532_Out_Voltage(DAC8532.channel_B, 0)
+
 
 except :
+    DAC.DAC8532_Out_Voltage(DAC8532.channel_A, 0)
+    DAC.DAC8532_Out_Voltage(DAC8532.channel_B, 0)
     GPIO.cleanup()
     print ("\r\nProgram end     ")
     exit()
